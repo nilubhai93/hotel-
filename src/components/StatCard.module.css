@@ -1,0 +1,311 @@
+/* StatCard.module.css */
+
+.card {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* Light Mode Defaults (assuming parent passes theme class or we use global variables, 
+   but for now I'll use specific classes that track the global theme if possible, 
+   or component specific props. 
+   To match AdminDashboard, I'll rely on global .light-mode / .dark-mode ancestry 
+   OR use CSS variables if they existed. 
+   Since AdminDashboard relies on .light-mode ancestry, I will too, 
+   but CSS Modules hash classes. I need to be careful. 
+   
+   Better approach: Use :global(.light-mode) .card to target global theme classes.
+*/
+
+:global(.light-mode) .card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-left: 4px solid #B45309;
+    box-shadow: 0 4px 6px -1px rgba(28, 25, 23, 0.05);
+}
+
+:global(.dark-mode) .card {
+    background: rgba(17, 24, 39, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 4px solid #F59E0B;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+}
+
+/* Hover Effects */
+.card:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+:global(.light-mode) .card:hover {
+    box-shadow: 0 20px 25px -5px rgba(28, 25, 23, 0.1);
+    border-color: #B45309;
+}
+
+:global(.dark-mode) .card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    border-color: #F59E0B;
+}
+
+/* Highlighted Variant (Revenue Card) */
+.highlighted {
+    position: relative;
+}
+
+:global(.light-mode) .highlighted {
+    border: 1px solid #B45309;
+    border-left-width: 4px;
+    box-shadow: 0 10px 30px -5px rgba(180, 83, 9, 0.15);
+}
+
+:global(.dark-mode) .highlighted {
+    border: 1px solid #F59E0B;
+    border-left-width: 4px;
+    box-shadow: 0 10px 30px -5px rgba(245, 158, 11, 0.2);
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.9;
+}
+
+:global(.light-mode) .title {
+    color: #57534E;
+}
+
+:global(.dark-mode) .title {
+    color: #9CA3AF;
+}
+
+/* Icon */
+.icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.4s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Normal Icon Styles */
+:global(.light-mode) .card:not(.highlighted) .icon {
+    background: #FAFAF9;
+    color: #B45309;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+:global(.dark-mode) .card:not(.highlighted) .icon {
+    background: #030712;
+    color: #F59E0B;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Highlighted Icon Styles (Filled) */
+:global(.light-mode) .highlighted .icon {
+    background: linear-gradient(135deg, #B45309 0%, #92400e 100%);
+    color: #FFFFFF;
+    border: none;
+    box-shadow: 0 4px 12px rgba(180, 83, 9, 0.3);
+}
+
+:global(.dark-mode) .highlighted .icon {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: #000000;
+    border: none;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+
+/* Value */
+.value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.02em;
+}
+
+:global(.light-mode) .value {
+    color: #1C1917;
+}
+
+:global(.dark-mode) .value {
+    color: #F9FAFB;
+}
+
+/* Trend */
+.trend {
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+.trendUp {
+    color: #059669;
+}
+
+.trendDown {
+    color: #dc2626;
+}
+
+.trendLabel {
+    opacity: 0.7;
+    font-weight: 400;
+}
+
+:global(.light-mode) .trendLabel {
+    color: #57534E;
+}
+
+:global(.dark-mode) .trendLabel {
+    color: #9CA3AF;
+}
+
+/* Gradient Overlay */
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+:global(.light-mode) .card::after {
+    background: radial-gradient(circle at top right, rgba(180, 83, 9, 0.05) 0%, transparent 60%);
+}
+
+:global(.dark-mode) .card::after {
+    background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.1) 0%, transparent 60%);
+}
+
+/* Color Variants */
+/* Blue */
+:global(.light-mode) .blue {
+    border-left-color: #2563EB;
+}
+
+:global(.dark-mode) .blue {
+    border-left-color: #3B82F6;
+}
+
+:global(.light-mode) .blue .icon {
+    color: #2563EB;
+    background: rgba(37, 99, 235, 0.1);
+}
+
+:global(.dark-mode) .blue .icon {
+    color: #3B82F6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+:global(.light-mode) .blue:hover {
+    border-color: #2563EB;
+}
+
+:global(.dark-mode) .blue:hover {
+    border-color: #3B82F6;
+}
+
+/* Emerald (Green) */
+:global(.light-mode) .emerald {
+    border-left-color: #059669;
+}
+
+:global(.dark-mode) .emerald {
+    border-left-color: #10B981;
+}
+
+:global(.light-mode) .emerald .icon {
+    color: #059669;
+    background: rgba(5, 150, 105, 0.1);
+}
+
+:global(.dark-mode) .emerald .icon {
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+:global(.light-mode) .emerald:hover {
+    border-color: #059669;
+}
+
+:global(.dark-mode) .emerald:hover {
+    border-color: #10B981;
+}
+
+/* Violet (Purple) */
+:global(.light-mode) .violet {
+    border-left-color: #7C3AED;
+}
+
+:global(.dark-mode) .violet {
+    border-left-color: #8B5CF6;
+}
+
+:global(.light-mode) .violet .icon {
+    color: #7C3AED;
+    background: rgba(124, 58, 237, 0.1);
+}
+
+:global(.dark-mode) .violet .icon {
+    color: #8B5CF6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+:global(.light-mode) .violet:hover {
+    border-color: #7C3AED;
+}
+
+:global(.dark-mode) .violet:hover {
+    border-color: #8B5CF6;
+}
+
+/* Default Orange/Amber (already defined but can be explicit) */
+:global(.light-mode) .amber {
+    border-left-color: #B45309;
+}
+
+:global(.dark-mode) .amber {
+    border-left-color: #F59E0B;
+}
+
+/* Keep highlight separate or mix? 
+   If highlighted, we want the fill. 
+   I will ensure highlighted respects the color variable if I used vars, but here I am using classes. 
+   Unique styles for highlighted + color would be complex. 
+   Assuming only Revenue is highlighted for now, which uses the default Amber/Orange styles.
+*/
+
+.card:hover::after {
+    opacity: 0.8;
+}

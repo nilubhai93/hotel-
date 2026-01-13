@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/hotel/static/css/main.bfd1dab7.css",
+    "main.js": "/hotel/static/js/main.f2d0a4a7.js",
+    "static/js/453.b9256582.chunk.js": "/hotel/static/js/453.b9256582.chunk.js",
+    "static/media/luxury_hotel_pool.png": "/hotel/static/media/luxury_hotel_pool.93e50ebd159cacb0a2e8.png",
+    "index.html": "/hotel/index.html",
+    "main.bfd1dab7.css.map": "/hotel/static/css/main.bfd1dab7.css.map",
+    "main.f2d0a4a7.js.map": "/hotel/static/js/main.f2d0a4a7.js.map",
+    "453.b9256582.chunk.js.map": "/hotel/static/js/453.b9256582.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bfd1dab7.css",
+    "static/js/main.f2d0a4a7.js"
+  ]
+}
